@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Что ИИ может взять на себя — анкета</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#EDF0EC;--ink:#1B2A2F;--muted:#5B696D;--teal:#1F6F66;--mark:#F4D35E;--card:#fff;--line:#CBD3CE;--r:10px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 Onest,system-ui,sans-serif;padding:28px 18px 60px}
+main{max-width:660px;margin:0 auto}
+h1,h2{font-family:Unbounded,Onest,system-ui,sans-serif;font-weight:600;line-height:1.2;margin:0 0 14px}
+h1{font-size:clamp(25px,6vw,34px)}
+h2{font-size:clamp(19px,4.5vw,23px)}
+h3{font-size:17px;margin:0 0 2px}
+p{margin:0 0 14px}
+.muted{color:var(--muted)}
+button{font:inherit;cursor:pointer;border-radius:var(--r);min-height:46px;padding:10px 18px;border:2px solid var(--ink);background:transparent;color:var(--ink)}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.go{background:var(--ink);color:#fff;font-weight:600}
+.go:disabled{opacity:.35;cursor:not-allowed}
+.bar{height:6px;background:var(--line);border-radius:3px;margin:6px 0 22px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal);transition:width .3s}
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 24px}
+.opt{border-color:var(--line);background:var(--card);text-align:left}
+.opt[aria-pressed=true]{border-color:var(--teal);background:var(--teal);color:#fff}
+textarea{width:100%;min-height:110px;font:inherit;padding:12px;border:2px solid var(--line);border-radius:var(--r);margin:14px 0 22px;resize:vertical;background:var(--card);color:var(--ink)}
+.nav{display:flex;gap:10px;align-items:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin:0 0 18px}
+.card .when{color:var(--muted);font-size:15px;margin:0 0 12px}
+.prompt{white-space:pre-wrap;border-left:5px solid var(--mark);background:#FAFBF8;padding:12px 14px;margin:0 0 12px;font-size:16px}
+mark{background:linear-gradient(transparent 12%,var(--mark) 12%,var(--mark) 92%,transparent 92%);color:inherit;padding:0 2px}
+.how{border:2px dashed var(--teal);border-radius:var(--r);padding:14px 16px;margin:0 0 22px}
+.cp.done{background:var(--teal);border-color:var(--teal);color:#fff}
+.top{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}
+.video{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 12px;margin:0 0 22px}
+.video svg{display:block;width:100%;height:auto}
+.cap{margin:10px 0 0;font-weight:500}
+.cap span{display:block;margin-bottom:4px}
+.g{fill:#C9D1CC}.y{fill:var(--mark)}.t{fill:var(--teal)}.i{fill:var(--ink)}.w{fill:#fff}
+.fly,.ring{opacity:0}.ym{opacity:0}
+.rev,.badge{transform-box:fill-box}.rev{transform-origin:left center}.badge{transform-origin:center}
+@media (prefers-reduced-motion:no-preference){
+.video *{animation-duration:14s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+.cap{display:grid;min-height:3.4em}.cap span{grid-area:1/1;margin:0}
+.ring{animation-name:ring}.btn{animation-name:btnf}.bl{animation-name:blf}.fly{animation-name:fly}.bub{animation-name:bub}
+.ym{animation-name:ymk}.tm{animation-name:tmk}.ai{animation-name:ai}.r1{animation-name:rv1}.r2{animation-name:rv2}.r3{animation-name:rv3}.badge{animation-name:bd}
+.c1{animation-name:c1}.c2{animation-name:c2}.c3{animation-name:c3}.c4{animation-name:c4}
+@keyframes ring{0%,3%{opacity:0}5%,14%{opacity:1}17%,100%{opacity:0}}
+@keyframes btnf{0%,9%{fill:#fff}11%,17%{fill:#1F6F66}20%,100%{fill:#fff}}
+@keyframes blf{0%,9%{fill:#1B2A2F}11%,17%{fill:#fff}20%,100%{fill:#1B2A2F}}
+@keyframes fly{0%,17%{opacity:0;transform:translate(0,0)}19%{opacity:1;transform:translate(0,0)}32%{opacity:1;transform:translate(390px,4px)}35%,100%{opacity:0;transform:translate(390px,4px)}}
+@keyframes bub{0%,32%{opacity:0}37%,94%{opacity:1}98%,100%{opacity:0}}
+@keyframes ymk{0%,46%{opacity:1}52%,100%{opacity:0}}
+@keyframes tmk{0%,46%{opacity:0}52%,100%{opacity:1}}
+@keyframes ai{0%,62%{opacity:0}66%,94%{opacity:1}98%,100%{opacity:0}}
+@keyframes rv1{0%,66%{transform:scaleX(0)}72%,100%{transform:scaleX(1)}}
+@keyframes rv2{0%,70%{transform:scaleX(0)}76%,100%{transform:scaleX(1)}}
+@keyframes rv3{0%,74%{transform:scaleX(0)}80%,100%{transform:scaleX(1)}}
+@keyframes bd{0%,80%{opacity:0;transform:scale(.4)}85%,94%{opacity:1;transform:scale(1)}98%,100%{opacity:0;transform:scale(1)}}
+@keyframes c1{0%,14%{opacity:1}17%,97%{opacity:0}100%{opacity:1}}
+@keyframes c2{0%,16%{opacity:0}19%,42%{opacity:1}45%,100%{opacity:0}}
+@keyframes c3{0%,44%{opacity:0}47%,59%{opacity:1}62%,100%{opacity:0}}
+@keyframes c4{0%,61%{opacity:0}64%,94%{opacity:1}97%,100%{opacity:0}}
+}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+const OCC={own:'веду своё дело',job:'работаю в найме',lead:'руковожу командой',study:'учусь',home:'веду дом и семью',free:'работаю на себя как фрилансер'};
+const STY={short:'Отвечай коротко и по делу, без вступлений.',long:'Объясняй подробно, по шагам и простыми словами.',friend:'Общайся дружелюбно, как коллега, без канцелярита.'};
+const Q=[
+{k:'occ',t:'Чем ты занимаешься?',h:'Выбери один вариант',m:1,o:{own:'Своё дело',job:'Работаю в найме',lead:'Руковожу командой',free:'Фриланс',study:'Учусь',home:'Дом и семья'}},
+{k:'time',t:'Что съедает больше всего времени?',h:'Выбери до трёх',m:3,o:{mail:'Переписка и письма',docs:'Документы и отчёты',plan:'Планирование и задачи',content:'Соцсети и тексты',sales:'Клиенты и продажи',tables:'Таблицы и цифры',search:'Поиск информации',chaos:'Всё в голове, хаос'}},
+{k:'goal',t:'Что для тебя главное?',h:'Выбери один вариант',m:1,o:{time:'Сэкономить время',order:'Навести порядок',write:'Писать лучше и быстрее',ideas:'Придумывать идеи'}},
+{k:'style',t:'Как тебе удобнее получать ответы?',h:'Выбери один вариант',m:1,o:STY_LABELS()},
+{k:'task',t:'Какая задача бесит больше всего?',h:'Необязательно. Опиши в паре предложений, своими словами',txt:1}
+];
+function STY_LABELS(){return{short:'Коротко и по делу',long:'Подробно, с объяснениями',friend:'По-дружески, без канцелярита'}}
+const T={
+mail:{n:'Ответ на письмо или сообщение',w:'Когда сообщение лежит и не хочется отвечать',g:['time','write'],p:'Помоги ответить на письмо. Вот оно: [вставь текст письма].\nМне нужно [согласиться / отказать / уточнить детали / выиграть время].\nТон: [деловой / дружелюбный].\nНапиши два варианта: короткий (3–4 предложения) и подробный. Ничего не выдумывай за меня: если не хватает фактов, сначала спроси.'},
+docs:{n:'Документ или отчёт с нуля',w:'Когда нужно оформить текст, а мысли в беспорядке',g:['write','time'],p:'Составь [отчёт / служебную записку / коммерческое предложение / описание процесса] для [кому].\nЦель: [чего хочу добиться].\nИсходные данные, как есть, можно в беспорядке: [факты, цифры, заметки].\nСначала предложи структуру из 5–7 пунктов и дождись моего «ок». Потом напиши текст и отметь места, где мне нужно проверить факты.'},
+plan:{n:'Разбор дел и план на неделю',w:'Когда дел много и непонятно, с чего начать',g:['order','time'],p:'Вот всё, что у меня на голове: [вывали сюда все дела списком, без порядка].\nРазбери на четыре группы: срочно и важно, важно но не срочно, можно передать другим, можно выбросить.\nДля первой группы составь план на [сегодня / неделю] по часам. У меня свободно [сколько] часов в день.\nЕсли какое-то дело непонятно, спроси.'},
+content:{n:'Контент-план и посты',w:'Когда нужно регулярно писать для соцсетей и не хватает идей',g:['write','ideas'],p:'Составь контент-план на [срок] для [соцсеть / канал].\nЧем я занимаюсь: [о деле в двух предложениях]. Для кого: [аудитория].\nПредложи [число] тем: к каждой заголовок, главная мысль и призыв к действию.\nПотом напиши лучший пост в моей манере. Вот пример моего текста: [вставь свой пост или абзац].'},
+sales:{n:'Ответ клиенту',w:'Когда клиент сомневается, тянет или торгуется',g:['time','write'],p:'Помоги ответить клиенту.\nЧто я продаю и по какой цене: [товар или услуга].\nЧто написал клиент: [сообщение].\nГлавное сомнение клиента, как я его понимаю: [цена / сроки / доверие].\nНапиши ответ, который снимает сомнение без давления, и предложи следующий шаг. Затем дай три вопроса, которые стоит задать клиенту дальше.'},
+tables:{n:'Разбор таблицы или цифр',w:'Когда данных много, а выводов нет',g:['order','time'],p:'Вот мои данные: [вставь таблицу или цифры как есть].\nЯ хочу понять: [куда уходят деньги / что продаётся лучше / где просадка].\nСначала скажи, что ты в них увидел и чего не хватает. Потом дай три главных вывода простыми словами. Если нужна формула для Excel или Google Таблиц, напиши её и объясни, в какую ячейку вставить.'},
+search:{n:'Быстро разобраться в новой теме',w:'Когда нужно понять тему, а читать десять статей некогда',g:['ideas','time'],p:'Мне нужно разобраться в теме: [тема]. Я новичок. Хочу решить: [какую задачу].\nОбъясни так, чтобы я прочитал за 5 минут: главное, частые ошибки и три вопроса, которые стоит задать специалисту.\nОтдельно отметь, что в твоём ответе может быть устаревшим или неточным, чтобы я проверил это сам.'},
+chaos:{n:'Разгрузить голову',w:'Когда всё держишь в уме и это утомляет',g:['order'],p:'Помоги навести порядок. Вот мои заметки вперемешку: [вставь всё подряд: дела, идеи, обещания, мысли].\nРазложи по группам: дела, идеи, договорённости, то, что просто тревожит.\nДля каждого дела предложи первое действие на 10 минут. Для идей скажи, какие стоит оставить, а какие отпустить.\nВ конце предложи простую систему на [заметки / таблица / ежедневник], которую я смогу вести по 5 минут в день.'}};
+const B={
+time:{n:'Итоги недели',w:'Раз в неделю, за 10 минут',p:'Подведём итоги недели. Что я сделал: [список]. Что не успел: [список]. Что отняло больше сил, чем стоило: [список].\nПомоги понять, почему не успел, и выбрать три приоритета на следующую неделю. Одну задачу предложи убрать совсем.'},
+order:{n:'Система порядка за 15 минут',w:'Когда хочется навести порядок раз и навсегда',p:'Хочу простую систему порядка для [дела / файлов / заметок / домашних задач]. Сейчас всё хранится так: [опиши как есть].\nПредложи схему не сложнее трёх папок или списков, с понятными названиями. Опиши, что куда класть, и что делать раз в неделю, чтобы порядок держался.'},
+write:{n:'Научить ИИ писать как я',w:'Один раз, чтобы потом тексты звучали в твоём стиле',p:'Вот три моих текста: [текст 1] [текст 2] [текст 3].\nОпиши мой стиль в пяти пунктах: длина фраз, тон, любимые приёмы, чего я избегаю, как обращаюсь к читателю. Дальше пиши так же. Я проверю на задаче: [тема текста].'},
+ideas:{n:'Мозговой штурм',w:'Когда нужна свежая идея или выход из тупика',p:'Моя цель: [что хочу получить]. Что уже пробовал: [список].\nПредложи 10 идей, от обычных до неожиданных. К каждой дай оценку: сколько усилий нужно и какая отдача. Выдели три лучших и скажи, с какого шага начать завтра.'}};
+const VID=`<div class="video"><svg viewBox="0 0 660 250" role="img" aria-label="Схема: нажимаешь «Скопировать» у шаблона, вставляешь его в чат с ИИ, заменяешь жёлтые места своими данными и получаешь готовый ответ">
+<rect x="10" y="10" width="290" height="200" rx="12" class="w" stroke="#CBD3CE"/>
+<rect x="28" y="28" width="120" height="10" rx="5" class="i"/>
+<rect x="28" y="52" width="6" height="86" rx="3" class="y"/>
+<rect x="44" y="54" width="220" height="8" rx="4" class="g"/>
+<rect x="44" y="72" width="90" height="8" rx="4" class="g"/><rect x="140" y="70" width="100" height="12" rx="3" class="y"/>
+<rect x="44" y="90" width="70" height="12" rx="3" class="y"/><rect x="120" y="92" width="140" height="8" rx="4" class="g"/>
+<rect x="44" y="110" width="200" height="8" rx="4" class="g"/>
+<rect x="44" y="128" width="120" height="8" rx="4" class="g"/>
+<rect class="btn w" x="28" y="160" width="130" height="36" rx="10" stroke="#1B2A2F" stroke-width="2"/>
+<rect class="bl i" x="46" y="175" width="94" height="6" rx="3"/>
+<circle class="ring" cx="93" cy="178" r="24" fill="none" stroke="#1F6F66" stroke-width="3"/>
+<g class="fly"><rect x="44" y="54" width="220" height="8" rx="4" class="g"/><rect x="44" y="72" width="90" height="8" rx="4" class="g"/><rect x="140" y="70" width="100" height="12" rx="3" class="y"/><rect x="44" y="90" width="70" height="12" rx="3" class="y"/><rect x="120" y="92" width="140" height="8" rx="4" class="g"/></g>
+<rect x="360" y="10" width="290" height="230" rx="12" fill="#F7F9F6" stroke="#CBD3CE"/>
+<circle cx="378" cy="26" r="4" class="g"/><circle cx="392" cy="26" r="4" class="g"/><circle cx="406" cy="26" r="4" class="g"/>
+<rect x="374" y="206" width="262" height="24" rx="12" class="w" stroke="#CBD3CE"/><circle cx="620" cy="218" r="6" class="t"/>
+<g class="bub"><rect x="420" y="44" width="216" height="86" rx="12" class="w" stroke="#1F6F66" stroke-width="2"/>
+<rect x="434" y="58" width="170" height="8" rx="4" class="g"/>
+<rect x="434" y="76" width="60" height="8" rx="4" class="g"/>
+<rect x="500" y="94" width="90" height="8" rx="4" class="g"/>
+<rect x="434" y="112" width="130" height="8" rx="4" class="g"/>
+<g class="ym"><rect x="500" y="74" width="90" height="12" rx="3" class="y"/><rect x="434" y="92" width="60" height="12" rx="3" class="y"/></g>
+<g class="tm"><rect x="500" y="74" width="90" height="12" rx="3" class="t"/><rect x="434" y="92" width="60" height="12" rx="3" class="t"/></g></g>
+<g class="ai"><circle cx="382" cy="160" r="9" class="t"/><rect x="398" y="140" width="224" height="58" rx="12" fill="#E4EFEC"/>
+<rect class="rev r1 t" x="412" y="152" width="190" height="7" rx="3.5" fill-opacity=".55"/>
+<rect class="rev r2 t" x="412" y="166" width="150" height="7" rx="3.5" fill-opacity=".55"/>
+<rect class="rev r3 t" x="412" y="180" width="170" height="7" rx="3.5" fill-opacity=".55"/></g>
+<g class="badge"><circle cx="628" cy="144" r="12" class="t"/><path d="M622 144l4 4 8-9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>
+<p class="cap"><span class="c1"><b>Шаг 1.</b> Нажми «Скопировать» у нужного шаблона</span><span class="c2"><b>Шаг 2.</b> Вставь текст в чат с ИИ</span><span class="c3"><b>Шаг 3.</b> Замени жёлтые места своими данными</span><span class="c4"><b>Шаг 4.</b> Получи готовый ответ</span></p></div>`;
+const A={};let i=-1;
+const app=document.getElementById('app');
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const hl=s=>esc(s).replace(/\[([^\]]+)\]/g,'<mark>[$1]</mark>');
+function start(){app.innerHTML='<h1>Что ИИ может взять на себя</h1><p>Ответь на пять коротких вопросов. В конце получишь готовые тексты для копирования: вставляешь в любой ИИ, заменяешь жёлтые места своими данными и получаешь результат.</p><p class="muted">Занимает около двух минут. Ничего не отправляется и не сохраняется: всё работает только в твоём браузере.</p><button class="go" id="s">Начать</button>';document.getElementById('s').onclick=()=>{i=0;ask()}}
+function ask(){
+const q=Q[i];const sel=q.m>1?(A[q.k]||[]):[];
+let h='<div class="muted">Вопрос '+(i+1)+' из '+Q.length+'</div><div class="bar"><i style="width:'+((i+1)/Q.length*100)+'%"></i></div><h2>'+q.t+'</h2><p class="muted">'+q.h+'</p>';
+if(q.txt)h+='<textarea id="tx" placeholder="Например: каждую неделю вручную собираю отчёт из трёх таблиц">'+esc(A.task||'')+'</textarea>';
+else{h+='<div class="opts">';for(const k in q.o){const on=q.m>1?sel.includes(k):A[q.k]===k;h+='<button class="opt" data-k="'+k+'" aria-pressed="'+on+'">'+q.o[k]+'</button>'}h+='</div>'}
+h+='<div class="nav">'+(i>0?'<button id="b">Назад</button>':'')+'<button class="go" id="n">'+(i==Q.length-1?'Показать результат':'Дальше')+'</button></div>';
+app.innerHTML=h;
+const n=document.getElementById('n');
+const ok=()=>q.txt||(q.m>1?(A[q.k]||[]).length>0:!!A[q.k]);
+const upd=()=>n.disabled=!ok();upd();
+app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const k=b.dataset.k;
+if(q.m>1){const a=A[q.k]=A[q.k]||[];const p=a.indexOf(k);if(p>-1)a.splice(p,1);else if(a.length<q.m)a.push(k)}else A[q.k]=k;
+app.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed',q.m>1?(A[q.k]||[]).includes(x.dataset.k):A[q.k]===x.dataset.k));upd()});
+n.onclick=()=>{if(q.txt)A.task=document.getElementById('tx').value.trim();i++;i<Q.length?ask():result()};
+if(i>0)document.getElementById('b').onclick=()=>{if(q.txt)A.task=document.getElementById('tx').value.trim();i--;ask()};
+window.scrollTo(0,0)}
+function result(){
+const topics=A.time.map(k=>Q[1].o[k].toLowerCase());
+const about='Обо мне: я '+OCC[A.occ]+'. Чаще всего мне нужна помощь с таким: '+topics.join(', ')+'. '+STY[A.style]+' Отвечай по-русски. Если не хватает данных, сначала задай до трёх уточняющих вопросов, а не выдумывай.';
+const list=[{n:'Расскажи ИИ о себе',w:'Вставь первым сообщением в новом чате. После этого ИИ будет отвечать под тебя',p:about}];
+[...A.time].sort((a,b)=>(T[a].g.includes(A.goal)?0:1)-(T[b].g.includes(A.goal)?0:1)).forEach(k=>list.push(T[k]));
+list.push(B[A.goal]);
+if(A.task)list.push({n:'Твоя самая неприятная задача',w:'Пусть ИИ разберёт её и подскажет, что можно автоматизировать',p:'Моя задача, которая бесит больше всего: «'+A.task+'».\nРазбери её: из каких шагов она состоит, какие из них ИИ может сделать за меня целиком, какие можно упростить. Затем составь для меня шаблон запроса с местами для моих данных, чтобы я мог повторять его каждый раз.'});
+let h='<h1>Твой набор готов</h1>'+VID+'<div class="how"><b>Как пользоваться.</b> Нажми «Скопировать», открой любой ИИ-чат и вставь текст. Жёлтые части в квадратных скобках замени своими данными. Начни с первого блока: он объясняет ИИ, кто ты.</div><div class="top"><button class="go" id="all">Скопировать всё</button><button id="re">Пройти заново</button></div>';
+list.forEach((t,j)=>{h+='<div class="card"><h3>'+esc(t.n)+'</h3><p class="when">'+esc(t.w)+'</p><div class="prompt">'+hl(t.p)+'</div><button class="cp" data-j="'+j+'">Скопировать</button></div>'});
+app.innerHTML=h;
+const done=(b,t)=>{const o=b.textContent;b.textContent=t||'Скопировано';b.classList.add('done');setTimeout(()=>{b.textContent=o;b.classList.remove('done')},1600)};
+app.querySelectorAll('.cp').forEach(b=>b.onclick=()=>copy(list[b.dataset.j].p,()=>done(b)));
+document.getElementById('all').onclick=function(){copy(list.map(t=>t.n+'\n\n'+t.p).join('\n\n———\n\n'),()=>done(this))};
+document.getElementById('re').onclick=()=>{for(const k in A)delete A[k];i=0;ask()};
+window.scrollTo(0,0)}
+function copy(t,cb){
+const fb=()=>{const x=document.createElement('textarea');x.value=t;x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();try{document.execCommand('copy')}catch(e){}x.remove();cb()};
+if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(cb,fb);else fb()}
+start();
+</script>
+</body>
+</html>
